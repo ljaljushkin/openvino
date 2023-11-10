@@ -222,11 +222,11 @@ void Transformations::PreLpt(const std::vector<ov::element::Type>& defaultPrecis
         };
         // We don't have BF16/FP16 FullyConnected kernels to work with 4bits compressed weights
         // Convert node doesn't support 4bit precisions -> fallback on constant folding
-        if (inferencePrecision == ov::element::f32) {
-            decompression_precisions.push_back(ov::element::u4);
-            decompression_precisions.push_back(ov::element::i4);
-            decompression_precisions.push_back(ov::element::nf4);
-        }
+        //if (inferencePrecision == ov::element::f32) {
+        //    decompression_precisions.push_back(ov::element::u4);
+        //    decompression_precisions.push_back(ov::element::i4);
+        //    decompression_precisions.push_back(ov::element::nf4);
+        //}
         // MarkDequantizationSubgraph is used even in non-LPT pipeline on X64 platforms
         // in order to keep compressed MatMul weights with decompression operations as is
         CPU_REGISTER_PASS_X64(manager, ov::pass::MarkDequantizationSubgraph, decompression_precisions, true);
